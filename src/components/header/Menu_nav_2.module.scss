@@ -1,0 +1,40 @@
+@import '../../assets/fonts.scss';
+@import '../../assets/colors.scss';
+
+* {
+    box-sizing: border-box;
+}
+
+.Menu {
+    display: flex;
+    justify-content: center;
+    background-color: #F1F1F1;
+    padding: 10px 0;
+    // position: fixed;
+    position: sticky;
+    top: 0;
+
+    &__Container {
+        width: 1200px;
+        padding: 0 15px;
+    }
+
+    &__Elem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+
+        &_Item {
+            font-family: $font-fam;
+            font-size: 12px;
+            color: #333333;
+            text-align: center;
+
+            & img {
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+}

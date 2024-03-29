@@ -5,8 +5,9 @@ import { Menu_nav_2 } from "../../components/header/Menu_nav_2"
 
 export function Home() {
     return (
-        <>
+        <div>
             <Menu_nav_1/>
-        </>
+            <Menu_nav_2/>
+        </div>
     )
 }

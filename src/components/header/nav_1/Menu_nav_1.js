@@ -9,7 +9,7 @@ import { Basket } from './Basket';
 export function Menu_nav_1() {
     return (
         <nav className={classes.Menu}>
-            <div >
+            <div className={classes.Menu__Container}>
             <ul className={clsx([classes.Menu__Elem, 'Inner__container'])}>
                 <li>
                     <NavLink to='/' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}>
@@ -17,12 +17,12 @@ export function Menu_nav_1() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/About' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}> 
+                    <NavLink to='/About' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}>
                         About
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/Contacts' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}> 
+                    <NavLink to='/Contacts' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}>
                         Contacts
                     </NavLink>
                 </li>

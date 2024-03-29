@@ -1,6 +1,9 @@
 @import '../../../assets/colors.scss';
 @import '../../../assets/fonts.scss';
 
+* {
+    // box-sizing: border-box;
+}
 
 .Menu {
     display: flex;
@@ -9,14 +12,18 @@
     height: 40px;
     background-color: #2E2E2E;
 
+    &__Container {
+        width: 1200px;
+        padding: 0 15px;
+    }
+
 
     &__Elem {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 1200px;
         list-style: none;
-           
+
         .elem_item {
             text-decoration: none;
             color: #BDBDBD;
