@@ -1,5 +1,6 @@
 @import '../../../assets/colors.scss';
 @import '../../../assets/fonts.scss';
+@import '../../../helpers/Container.module.scss';
 
 * {
     // box-sizing: border-box;
@@ -12,23 +13,20 @@
     height: 40px;
     background-color: #2E2E2E;
 
-    &__Container {
-        width: 1200px;
-        padding: 0 15px;
-    }
-
 
     &__Elem {
         display: flex;
         justify-content: space-between;
         align-items: center;
         list-style: none;
+        flex: 1;
 
         .elem_item {
             text-decoration: none;
             color: #BDBDBD;
             font-family: $font-fam;
             font-size: 15px;
+
 
             &.active {
                 color: $blue;

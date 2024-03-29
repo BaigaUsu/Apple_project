@@ -1,8 +1,9 @@
 @import '../../assets/fonts.scss';
 @import '../../assets/colors.scss';
+@import '../../helpers/Container.module.scss';
 
 * {
-    box-sizing: border-box;
+    // box-sizing: border-box;
 }
 
 .Menu {
@@ -10,14 +11,8 @@
     justify-content: center;
     background-color: #F1F1F1;
     padding: 10px 0;
-    // position: fixed;
     position: sticky;
     top: 0;
-
-    &__Container {
-        width: 1200px;
-        padding: 0 15px;
-    }
 
     &__Elem {
         display: flex;

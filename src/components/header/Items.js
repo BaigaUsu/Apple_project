@@ -16,21 +16,19 @@ export function Items() {
 
     return (
         <div>
-            <Content>
-                <Menu_nav_1/>
-                <Menu_nav_2/>
-                {filteredItems.map(item => (
-                    <div key={item.id}>
-                        <img
-                            src={item.image}
-                            alt={`${item.category} photo`}
-                            width='200px'
-                        />
-                        <h1>{item.category}</h1>
-                        <div>{item.description}</div>
-                    </div>
-                ))}
-            </Content>
+            <Menu_nav_1/>
+            <Menu_nav_2/>
+            {filteredItems.map(item => (
+                <div key={item.id}>
+                    <img
+                        src={item.image}
+                        alt={`${item.category} photo`}
+                        width='200px'
+                    />
+                    <h1>{item.category}</h1>
+                    <div>{item.description}</div>
+                </div>
+            ))}
         </div>
     );
 }
