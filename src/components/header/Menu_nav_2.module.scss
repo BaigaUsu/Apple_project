@@ -13,6 +13,9 @@
     padding: 10px 0;
     position: sticky;
     top: 0;
+    z-index: 2;
+
+    // .Container from Container.module.scss
 
     &__Elem {
         display: flex;
@@ -23,11 +26,15 @@
         &_Item {
             font-family: $font-fam;
             font-size: 12px;
-            color: #333333;
             text-align: center;
 
-            & img {
-                margin-bottom: 5px;
+            .Item_Link {
+                text-decoration: none;
+                color: #333333;
+            }
+
+            & p {
+
             }
         }
 
