@@ -7,8 +7,9 @@ import { Home } from '../pages/Home/Home';
 import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
 import { ItemPage } from '../pages/ItemPage/ItemPage';
+import { randomItems } from '../helpers/Utils';
 export function App() {
-    const api = 'https://f100befe80a6e177a722a6f90b242fb1.serveo.net/api/products/products-api/';
+    const api = 'https://dd216b9d12e1730f3d2795b5126a3da4.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
@@ -16,7 +17,8 @@ export function App() {
             loader: async () => {
                 const res = await fetch(api);
                 const data = await res.json();
-                return {item: data}
+                const shuffledData = randomItems(data);
+                return {item: shuffledData};
             }
         },
         {path:"/About", element:<About/> },
