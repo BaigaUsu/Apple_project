@@ -23,10 +23,12 @@
             flex:  33.33%;
             max-width: 33.333333%;
 
+
             &_Elem {
                 background-color: #F3F3F3;
                 padding: 1.5rem 1rem ;
                 display: flex;
+                cursor: pointer;
                 // justify-content: center;
                 // height: 100%;
 
@@ -38,13 +40,12 @@
                     width: 100%;
                     font-family: $font-fam;
                     font-size: 1rem;
-                    font-weight: 400;
+                    font-weight: 500;
                     line-height: 1.5;
                     color: $text-head;
 
                     & p:nth-child(1) {
                         color: $text-head;
-                        font-weight: 500;
                         margin-top: 0.25rem;
                     }
 
@@ -53,9 +54,10 @@
                         margin-top: 0.25rem;
                     }
 
-                    & p:nth-last-child(1){
+                    & p:nth-child(3){
                         display: block;
-                        margin-top: 6rem;
+                        margin-top: 4rem;
+                        font-size: 28px;
                     }
 
                 }
@@ -83,9 +85,12 @@
                             font-size: 18px;
                             line-height: 21px;
                             color: $blue;
-                            cursor: pointer;
                             display: inline;
                             font-family: $font-fam;
+                        }
+
+                        & .Btn:hover {
+                            text-decoration: underline;
                         }
 
                         & svg {

@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import classes from './Section_1.module.scss';
 import { Button } from "../Button/Button";
 import { randomItems } from "../../helpers/Utils";
@@ -6,12 +6,17 @@ import { randomItems } from "../../helpers/Utils";
 export function Section_1() {
     const {item} = useLoaderData()
     const shuffledItems = randomItems(item).slice(0, 7);
+    const navigate = useNavigate()
     return (
         <div className={classes.Main__Block}>
             <div className={classes.Inner__Block}>
                 {shuffledItems.map(item => (
                     <div className={classes.Item__Block}>
-                        <div className={classes.Item__Block_Elem}>
+                        <div className={classes.Item__Block_Elem}
+                            onClick={() => {
+                            navigate(`/Items/${item.id}`)
+                        }}
+                        >
                             <div className={classes.Title}>
                                 <p>{item.category} fasdfsa</p>
                                 <p>{item.category}</p>

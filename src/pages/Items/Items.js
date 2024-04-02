@@ -22,7 +22,10 @@ export function Items() {
         <div className={classes.Items}>
             <Menu_nav_1/>
             <Menu_nav_2/>
-            <Link to="/">home</Link>
+            <Link to="/">home {category}</Link>
+            <div className={classes.Title__Block}>
+                <h1 className={classes.Title__Block_Item}>{category}</h1>
+            </div>
             <div className={classes.Main__Block}>
                 <div className={classes.Container}>
                     <div className={classes.Inner__Block}>

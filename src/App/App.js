@@ -9,7 +9,7 @@ import { Items } from '../pages/Items/Items';
 import { ItemPage } from '../pages/ItemPage/ItemPage';
 import { randomItems } from '../helpers/Utils';
 export function App() {
-    const api = 'https://dd216b9d12e1730f3d2795b5126a3da4.serveo.net/api/products/products-api/';
+    const api = 'https://8556e07263e5292988c99e69570abb9d.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
