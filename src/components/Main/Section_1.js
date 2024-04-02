@@ -5,10 +5,11 @@ import { randomItems } from "../../helpers/Utils";
 import classes from './Section_1.module.scss';
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import { useMemo } from "react";
 
 export function Section_1() {
     const { item } = useLoaderData();
-    const shuffledItems = randomItems(item).slice(0, 7); // перемешивание и выбор 7 элементов
+    const shuffledItems = useMemo(() => randomItems(item).slice(0, 7), [item]); // перемешивание и выбор 7 элементов
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
