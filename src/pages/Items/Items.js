@@ -1,11 +1,11 @@
-import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleItemFavorite } from '../../store/action';
+import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { Menu_nav_1 } from "../../components/header/nav_1/Menu_nav_1";
 import { Menu_nav_2 } from "../../components/header/Menu_nav_2";
-import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import classes from './Items.module.scss'
+import classes from './Items.module.scss';
 import { Button } from "../../components/Button/Button";
-import { Home } from "../Home/Home";
-
+import { Icon } from "../../components/Icon/Icon";
 
 export function Items() {
     const location = useLocation();
@@ -13,15 +13,18 @@ export function Items() {
     const category = searchParams.get('category');
 
     const { items } = useLoaderData();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const favoriteItems = useSelector(state => state.favorites); // Получаем список избранных элементов
+    const isFavorite = (id) => favoriteItems.includes(id);
 
     const filteredItems = category ? items.filter(item => item.category === category) : items;
 
-
     return (
         <div className={classes.Items}>
-            <Menu_nav_1/>
-            <Menu_nav_2/>
+            <Menu_nav_1 />
+            <Menu_nav_2 />
             <Link to="/">home {category}</Link>
             <div className={classes.Title__Block}>
                 <h1 className={classes.Title__Block_Item}>{category}</h1>
@@ -32,17 +35,25 @@ export function Items() {
                         {filteredItems.map(item => (
                             <div
                                 className={classes.Item__Block}
-                                onClick={() => {
-                                    navigate(`/Items/${item.id}`)
-                                }}
+                                key={item.id}
                             >
-                                <Link className={classes.Item__Block_Link}>
+                                <div className={classes.Item__Block_Link}
+                                    onClick={() => {
+                                        navigate(`/Items/${item.id}`);
+                                    }}>
                                     <img src={item.image} />
                                     <h5>{item.name}</h5>
-                                    <Button
-                                        text='choose'
+                                    <Button text="choose" />
+                                </div>
+                                <div className={classes.favourite}
+                                    onClick={() => {
+                                        dispatch(toggleItemFavorite({ id: item.id }));
+                                    }}
+                                >
+                                    <Icon
+                                        name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
                                     />
-                                </Link>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -1,5 +1,6 @@
-import React from 'react';
 import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {store} from '../store/store';
 import { About } from '../pages/About/About';
 import { Contacts } from '../pages/Contacts/Contacts';
 import { Login } from '../pages/Login/Login';
@@ -9,7 +10,7 @@ import { Items } from '../pages/Items/Items';
 import { ItemPage } from '../pages/ItemPage/ItemPage';
 import { randomItems } from '../helpers/Utils';
 export function App() {
-    const api = 'https://8556e07263e5292988c99e69570abb9d.serveo.net/api/products/products-api/';
+    const api = 'https://147f0d22218d4e448faa8dd741bce199.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
@@ -45,6 +46,8 @@ export function App() {
         },
 ])
   return (
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
   );
 }

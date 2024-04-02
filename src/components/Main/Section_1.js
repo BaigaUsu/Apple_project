@@ -1,30 +1,42 @@
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { toggleItemFavorite } from '../../store/action';
+import { useDispatch, useSelector } from "react-redux";
+import { randomItems } from "../../helpers/Utils";
 import classes from './Section_1.module.scss';
 import { Button } from "../Button/Button";
-import { randomItems } from "../../helpers/Utils";
+import { Icon } from "../Icon/Icon";
 
 export function Section_1() {
-    const {item} = useLoaderData()
-    const shuffledItems = randomItems(item).slice(0, 7);
-    const navigate = useNavigate()
+    const { item } = useLoaderData();
+    const shuffledItems = randomItems(item).slice(0, 7); // перемешивание и выбор 7 элементов
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const favoriteItems = useSelector(state => state.favorites); // Получаем список избранных элементов
+    const isFavorite = (id) => favoriteItems.includes(id);
+
     return (
         <div className={classes.Main__Block}>
             <div className={classes.Inner__Block}>
                 {shuffledItems.map(item => (
-                    <div className={classes.Item__Block}>
-                        <div className={classes.Item__Block_Elem}
-                            onClick={() => {
-                            navigate(`/Items/${item.id}`)
-                        }}
-                        >
-                            <div className={classes.Title}>
+                    <div className={classes.Item__Block} key={item.id}>
+                        <div className={classes.Item__Block_Elem}>
+                            <div className={classes.Title}
+                                onClick={() => {
+                                    navigate(`/Items/${item.id}`)
+                                }}
+                            >
                                 <p>{item.category} fasdfsa</p>
                                 <p>{item.category}</p>
                                 <p>{item.price}</p>
                             </div>
-                            <div className={classes.Img_But}>
+                            <div className={classes.Img_But}
+                                onClick={() => {
+                                    navigate(`/Items/${item.id}`)
+                                }}
+                            >
                                 <img src={item.image} width='200px'/>
-                                <Link className={classes.Img_But_Link}>
+                                <div className={classes.Img_But_Link}>
                                     <Button text={'choose'} className={classes.Btn}/>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14" viewBox="0 0 11 14" fill="none">
                                         <g clip-path="url(#clip0)">
@@ -36,7 +48,12 @@ export function Section_1() {
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                </Link>
+                                </div>
+                            </div>
+                            <div onClick={() => {dispatch(toggleItemFavorite({ id: item.id }))}}>
+                                <Icon
+                                    name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                                />
                             </div>
                         </div>
                     </div>
