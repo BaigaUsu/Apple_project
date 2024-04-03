@@ -9,8 +9,9 @@ import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
 import { ItemPage } from '../pages/ItemPage/ItemPage';
 import { randomItems } from '../helpers/Utils';
+import { Basket } from '../components/header/nav_1/Basket';
 export function App() {
-    const api = 'https://147f0d22218d4e448faa8dd741bce199.serveo.net/api/products/products-api/';
+    const api = 'https://70f6454af92251a5c0a8264a1c1241f1.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
@@ -43,6 +44,17 @@ export function App() {
                 const data = await res.json();
                 return data
             }
+        },
+        {
+            path: '/Basket',
+            element: <Basket />,
+            loader: async () => {
+                const { favorites } = store.getState();
+                const res = await fetch(api);
+                const data = await res.json();
+                const filteredData = data.filter(item => favorites.includes(item.id));
+                return filteredData;
+            },
         },
 ])
   return (

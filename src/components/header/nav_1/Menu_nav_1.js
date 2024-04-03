@@ -37,7 +37,11 @@ export function Menu_nav_1() {
                         </NavLink>
                     </li>
                     <Search_bar/>
-                    <Basket/>
+                    <li>
+                        <NavLink to='/Basket' className={({isActive}) => `${classes['elem_item']} ${isActive ? classes.active : ""}`}>
+                            hello
+                        </NavLink>
+                    </li>
                 </ul>
            </div>
         </nav>

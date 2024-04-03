@@ -16,7 +16,7 @@ export function Items() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const favoriteItems = useSelector(state => state.favorites); // Получаем список избранных элементов
+    const favoriteItems = useSelector(state => state.favorites);
     const isFavorite = (id) => favoriteItems.includes(id);
 
     const filteredItems = category ? items.filter(item => item.category === category) : items;
