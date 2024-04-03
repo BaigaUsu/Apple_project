@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { toggleItemFavorite } from '../../store/action';
 import { useDispatch, useSelector } from "react-redux";
 import { randomItems } from "../../helpers/Utils";
@@ -9,11 +9,11 @@ import { useMemo } from "react";
 
 export function Section_1() {
     const { item } = useLoaderData();
-    const shuffledItems = useMemo(() => randomItems(item).slice(0, 7), [item]); // перемешивание и выбор 7 элементов
+    const shuffledItems = useMemo(() => randomItems(item).slice(0, 7), [item]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const favoriteItems = useSelector(state => state.favorites); // Получаем список избранных элементов
+    const favoriteItems = useSelector(state => state.favorites);
     const isFavorite = (id) => favoriteItems.includes(id);
 
     return (

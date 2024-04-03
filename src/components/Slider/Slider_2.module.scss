@@ -1,0 +1,73 @@
+@import '../../assets/fonts.scss';
+
+*{
+    box-sizing: border-box;
+}
+
+
+.Slider__Container {
+    margin-top: 1.5rem;
+    overflow: scroll;
+    padding: 0 2rem;
+
+
+    .Slider__Block {
+        display: flex;
+        margin-top: 1.5rem;
+        padding: 1.5rem 0;
+
+
+
+        &_Item{
+            width: 400px;
+            height: 500px;
+            border-radius: 18px;
+            box-shadow: 2px 4px 7px rgba(0,0,0,.08);
+            transition: all .3s cubic-bezier(0,0,.5,1);
+            position: relative;
+            margin-right: 20px;
+            cursor: pointer;
+
+            .Slider__Image {
+                // object-fit: cover;
+                overflow: clip;
+                width: 400px;
+                height: 100%;
+                border-radius: 18px;
+            }
+
+            .Item__Info {
+                position: absolute;
+                padding: 30px;
+                & h3 {
+                    color: #f5f5f7;
+                    line-height: 1.33337;
+                    letter-spacing: -.01em;
+                    font-family: $font-fam;
+                    font-weight: 600;
+                    padding-bottom: 8px;
+                }
+                & p {
+                    font-size: 28px;
+                    line-height: 1.14286;
+                    font-weight: 600;
+                    letter-spacing: .007em;
+                    font-family: $font-fam;
+                    padding-top: 15px;
+                    margin-top: 0;
+                    text-decoration: none;
+                    color: white;
+                }
+            }
+
+
+        }
+
+        &_Item:hover {
+            transition: all .3s cubic-bezier(0,0,.5,1);
+            transform: scale(1.01);
+            position: relative;
+        }
+
+    }
+}

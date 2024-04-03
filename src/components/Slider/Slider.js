@@ -1,26 +1,27 @@
-
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from './Slider.module.scss'
 import {Autoplay, Navigation} from "swiper/modules";
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import 'swiper/css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export function Slider() {
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate()
 
-    const images = [
-        'AppleVision_slide.jpg',
-        'macbook_slide.jpg',
-        'iPhone15_slide.webp',
-        'iPhone15Pro_slide.webp',
-        'AppleWatch_slide.webp',
-        'AppleWatchUltra_slide.webp',
-        'MacBookAir_slide.png',
-    ];
+    useEffect(() => {
+    fetch('https://70f6454af92251a5c0a8264a1c1241f1.serveo.net/api/products/products-api/')
+      .then(response => response.json())
+      .then(data => {
+        const filteredProducts = data.filter(product => product.scroll === 'in');
+        const sortedProducts = filteredProducts.sort((a, b) => a.id - b.id);
+        setProducts(filteredProducts);
+      })
+      .catch(error => console.error('Error fetching products:', error));
+  }, []);
 
     return (
         <div className={styles.swiperBlock}>
@@ -37,12 +38,13 @@ export function Slider() {
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
-            {images.map((image, index) => (
+            {products.map((image, index) => (
                     <SwiperSlide key={index}>
-                        <Link to='ItemPage'>
                         <img className={styles.slidesImage}
-                            src={`https://ik.imagekit.io/kvsf72hfx/SwiperSlide/${image}`} alt=""/>
-                        </Link>
+                            src={image.scroll_image}
+                            onClick={() => {
+                                navigate(`/Items/${image.id}`);
+                                }}/>
                     </SwiperSlide>
                 ))}
             </Swiper>
