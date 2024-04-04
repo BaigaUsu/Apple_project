@@ -13,10 +13,10 @@ export function Slider() {
     const navigate = useNavigate()
 
     useEffect(() => {
-    fetch('https://70f6454af92251a5c0a8264a1c1241f1.serveo.net/api/products/products-api/')
+    fetch('https://044aa46ef8ddb014c704ad5da35ecfd1.serveo.net/api/products/products-api/')
       .then(response => response.json())
       .then(data => {
-        const filteredProducts = data.filter(product => product.scroll === 'in');
+        const filteredProducts = data.filter(product => product.upper_scroll === 'in');
         const sortedProducts = filteredProducts.sort((a, b) => a.id - b.id);
         setProducts(filteredProducts);
       })
@@ -41,7 +41,7 @@ export function Slider() {
             {products.map((image, index) => (
                     <SwiperSlide key={index}>
                         <img className={styles.slidesImage}
-                            src={image.scroll_image}
+                            src={image.upper_scroll_image}
                             onClick={() => {
                                 navigate(`/Items/${image.id}`);
                                 }}/>

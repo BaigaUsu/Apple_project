@@ -11,7 +11,7 @@ import { ItemPage } from '../pages/ItemPage/ItemPage';
 import { randomItems } from '../helpers/Utils';
 import { Basket } from '../components/header/nav_1/Basket';
 export function App() {
-    const api = 'https://70f6454af92251a5c0a8264a1c1241f1.serveo.net/api/products/products-api/';
+    const api = 'https://044aa46ef8ddb014c704ad5da35ecfd1.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
