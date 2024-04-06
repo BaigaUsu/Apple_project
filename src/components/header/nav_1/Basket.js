@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { toggleItemFavorite } from "../../../store/action";
 import { Menu_nav_1 } from "./Menu_nav_1";
-import { Menu_nav_2 } from "../Menu_nav_2";
+import { Menu_nav_2 } from "../nav_2/Menu_nav_2";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "../../Icon/Icon";
 
