@@ -9,13 +9,12 @@ import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
 import { ItemIphone } from '../pages/ItemPage/ItemIphon';
 import { randomItems } from '../helpers/Utils';
-import { Basket } from '../components/header/nav_1/Basket';
+import { Basket } from '../components/Header/nav_1/Basket';
 import { Mac } from '../pages/ItemPage/Mac';
 import { Ipad } from '../pages/ItemPage/iPad';
 import { loadAppleList } from '../Api/loadAppleList';
 import { loadAppleItem } from '../Api/loadAppleItem';
 export function App() {
-    const api = 'https://8379accc7658946157016aec232d3bfa.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",

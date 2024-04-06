@@ -15,17 +15,17 @@ export function Basket() {
         <>
             <Menu_nav_1/>
             <Menu_nav_2/>
-           {items.map(item => (
+            {items.map(item => (
                 <div key={item.id}>
                     <div
-                                    onClick={() => {
-                                        dispatch(toggleItemFavorite({ id: item.id }));
-                                    }}
-                                >
-                                    <Icon
-                                        name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
-                                    />
-                                </div>
+                        onClick={() => {
+                            dispatch(toggleItemFavorite({ id: item.id }));
+                        }}
+                    >
+                        <Icon
+                            name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                        />
+                    </div>
                     <div>{item.name}</div>
                     <div>{item.price}</div>
                     <img src={item.image} width='200'/>
