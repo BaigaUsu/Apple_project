@@ -7,18 +7,21 @@ import { Login } from '../pages/Login/Login';
 import { Home } from '../pages/Home/Home';
 import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
-import { ItemPage } from '../pages/ItemPage/ItemPage';
+import { ItemIphone } from '../pages/ItemPage/ItemIphon';
 import { randomItems } from '../helpers/Utils';
 import { Basket } from '../components/header/nav_1/Basket';
+import { Mac } from '../pages/ItemPage/Mac';
+import { Ipad } from '../pages/ItemPage/iPad';
+import { loadAppleList } from '../Api/loadAppleList';
+import { loadAppleItem } from '../Api/loadAppleItem';
 export function App() {
-    const api = 'https://044aa46ef8ddb014c704ad5da35ecfd1.serveo.net/api/products/products-api/';
+    const api = 'https://8379accc7658946157016aec232d3bfa.serveo.net/api/products/products-api/';
     const router = createHashRouter([
         {
             path:"/",
             element:<Home/>,
             loader: async () => {
-                const res = await fetch(api);
-                const data = await res.json();
+                const data = await loadAppleList();
                 const shuffledData = randomItems(data);
                 return {item: shuffledData};
             }
@@ -30,19 +33,27 @@ export function App() {
         {
             path:"/Items",
             element:<Items/>,
-            loader: async () => {
-                const res = await fetch(api);
-                const data = await res.json();
-                return {items: data}
+            loader: loadAppleList,
+        },
+        {
+            path: "/ItemIphone/:id",
+            element: <ItemIphone/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
             }
         },
         {
-            path: "/Items/:id",
-            element: <ItemPage/>,
+            path: "/Mac/:id",
+            element: <Mac/>,
             loader: async ({params}) => {
-                const res = await fetch(`${api}${params.id}/`);
-                const data = await res.json();
-                return data
+                return loadAppleItem(params.id)
+            }
+        },
+        {
+            path: "/Ipad/:id",
+            element: <Ipad/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
             }
         },
         {
@@ -50,10 +61,8 @@ export function App() {
             element: <Basket />,
             loader: async () => {
                 const { favorites } = store.getState();
-                const res = await fetch(api);
-                const data = await res.json();
-                const filteredData = data.filter(item => favorites.includes(item.id));
-                return filteredData;
+                const data = await loadAppleList();
+                return data.filter(item => favorites.includes(item.id));
             },
         },
 ])
