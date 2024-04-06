@@ -7,11 +7,11 @@ import { Login } from '../pages/Login/Login';
 import { Home } from '../pages/Home/Home';
 import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
-import { ItemIphone } from '../pages/ItemPage/ItemIphon';
+import { ItemIphone } from '../pages/ItemPage/ItemIphone';
 import { randomItems } from '../helpers/Utils';
 import { Basket } from '../components/Header/nav_1/Basket';
 import { Mac } from '../pages/ItemPage/Mac';
-import { Ipad } from '../pages/ItemPage/iPad';
+import { Ipad } from '../pages/ItemPage/Ipad';
 import { loadAppleList } from '../Api/loadAppleList';
 import { loadAppleItem } from '../Api/loadAppleItem';
 export function App() {

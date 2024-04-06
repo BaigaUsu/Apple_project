@@ -1,0 +1,21 @@
+export function route(item) {
+     if (item.category === 'MacBook') {
+        return `/Mac/${item.id}`;
+    } else if (item.category === 'iPad') {
+        return `/Ipad/${item.id}`;
+    } else if (item.category === 'iMac') {
+        return `/Imac/${item.id}`;
+    } else if (item.category === 'iPad') {
+        return `/Ipad/${item.id}`;
+    } else if (item.category === 'Watch') {
+        return `/Watch/${item.id}`;
+    } else if (item.category === 'AirPods') {
+        return `/AirPods/${item.id}`;
+    } else if (item.category === 'Gadgets') {
+        return `/Gadgets/${item.id}`;
+    } else if (item.category === 'Accessories') {
+        return `/Accessories/${item.id}`;
+    } else {
+        return `/ItemIphone/${item.id}`;
+    }
+}

@@ -6,6 +6,7 @@ import classes from './Section_1.module.scss';
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { useMemo } from "react";
+import { route } from "../../App/route";
 
 export function Section_1() {
     const { item } = useLoaderData();
@@ -33,7 +34,7 @@ export function Section_1() {
                             </div>
                             <div className={classes.Img_But}
                                 onClick={() => {
-                                    navigate(`/Items/${item.id}`)
+                                    navigate(route(item))
                                 }}
                             >
                                 <img src={item.image} width='200px'/>
