@@ -14,6 +14,7 @@ import { Mac } from '../pages/ItemPage/Mac';
 import { Ipad } from '../pages/ItemPage/Ipad';
 import { loadAppleList } from '../Api/loadAppleList';
 import { loadAppleItem } from '../Api/loadAppleItem';
+import { Watch } from '../pages/ItemPage/Watch';
 export function App() {
     const router = createHashRouter([
         {
@@ -51,6 +52,13 @@ export function App() {
         {
             path: "/Ipad/:id",
             element: <Ipad/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
+            }
+        },
+        {
+            path: "/Watch/:id",
+            element: <Watch/>,
             loader: async ({params}) => {
                 return loadAppleItem(params.id)
             }

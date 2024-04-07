@@ -13,7 +13,7 @@ export function Slider() {
     const navigate = useNavigate()
 
     useEffect(() => {
-    fetch('https://044aa46ef8ddb014c704ad5da35ecfd1.serveo.net/api/products/products-api/')
+    fetch('https://e21f1405401110ebf8c6b83c467b2bfe.serveo.net/api/products/')
       .then(response => response.json())
       .then(data => {
         const filteredProducts = data.filter(product => product.upper_scroll === 'in');

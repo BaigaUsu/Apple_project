@@ -25,19 +25,18 @@ export function Section_1() {
                         <div className={classes.Item__Block_Elem}>
                             <div className={classes.Title}
                                 onClick={() => {
-                                    navigate(`/Items/${item.id}`)
+                                    navigate(route(item))
                                 }}
                             >
-                                <p>{item.category} fasdfsa</p>
+                                <p>{item.name} </p>
                                 <p>{item.category}</p>
-                                <p>{item.price}</p>
                             </div>
                             <div className={classes.Img_But}
                                 onClick={() => {
                                     navigate(route(item))
                                 }}
                             >
-                                <img src={item.image} width='200px'/>
+                                <img src={item.colors[0].product_images[0].product_image} width='200px'/>
                                 <div className={classes.Img_But_Link}>
                                     <Button text={'choose'} className={classes.Btn}/>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14" viewBox="0 0 11 14" fill="none">

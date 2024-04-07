@@ -8,11 +8,11 @@ export function Slider_2() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('https://8379accc7658946157016aec232d3bfa.serveo.net/api/products/products-api/')
+    fetch('https://e21f1405401110ebf8c6b83c467b2bfe.serveo.net/api/products/')
       .then(response => response.json())
       .then(data => {
         const filteredProducts = data.filter(product => product.bottom_scroll === 'in');
-        const sortedProducts = filteredProducts.sort((a, b) => a.id - b.id);
+        const sortedProducts = filteredProducts.sort((a, b) => a.bottom_scroll_number - b.bottom_scroll_number);
         setProducts(filteredProducts);
       })
       .catch(error => console.error('Error fetching products:', error));

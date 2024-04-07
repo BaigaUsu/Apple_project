@@ -6,30 +6,41 @@ import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 
 export function ItemIphone() {
-  const item = useLoaderData();
-  const colors = item.colors.map(color => color.color);
-  const icons = item.colors.map(color => color.color_image);
-  const img = item.colors.map(img => img.product_images[0].product_image)
-  const capacity = item.capacities_and_prices.map(cap => cap.capacity)
-  const price = item.capacities_and_prices.map(price => price.price)
+    const item = useLoaderData();
+    const colors = item.colors.map(color => color.color);
+    const icons = item.colors.map(color => color.color_image);
+    const capacity = item.capacities_and_prices.map(cap => cap.capacity)
 
-  const [currentPrice, setCurrentPrice] = useState(price[0]);
+    const price = item.capacities_and_prices.map(price => price.price)
+    const [selectedCapacityBorder, setSelectedCapacityBorder] = useState(0);
+    const [currentPrice, setCurrentPrice] = useState(price[0]);
+    const handleCapacityClick = (index) => {
+        setCurrentPrice(price[index]);
+    };
+    const handleBothClick = (index) => {
+        setSelectedCapacityBorder(index);
+        handleCapacityClick(index);
+    };
 
-const handleCapClick = (index) => {
-  setCurrentPrice(price[index]);
-};
+    const img = item.colors.map(img => img.product_images[0].product_image)
+    const [selectedIconBorder, setSelectedIconBorder] = useState(0);
+    const [currentImage, setCurrentImage] = useState(img[0]);
+        const handleIconClick = (index) => {
+        setCurrentImage(img[index]);
+    };
+    const hadnleImageBorderClick = (index) => {
+        setSelectedIconBorder(index);
+        handleIconClick(index);
+    }
 
-const [currentImage, setCurrentImage] = useState(img[0]);
 
-const handleColorClick = (index) => {
-  setCurrentImage(img[index]);
-};
-const [selectedWindow, setSelectedWindow] = useState('info2');
 
-const handleClick = (windowName) => {
-  setSelectedWindow(windowName);
-};
-
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК НИЖНЕГО БЛОКА --------------------------------------
+    const [selectedWindow, setSelectedWindow] = useState('info2');
+        const handleWindowClick = (windowName) => {
+        setSelectedWindow(windowName);
+    };
+//----------------------------------------------------------------------------------
 
     return (
         <div className={classes.App}>
@@ -56,7 +67,8 @@ const handleClick = (windowName) => {
                                         key={index}
                                         src={icon}
                                         alt={`Color ${index + 1}`}
-                                        onClick={() => handleColorClick(index)}
+                                        className={selectedIconBorder === index ? classes.ActiveBlock : 'img'}
+                                        onClick={() => hadnleImageBorderClick(index)}
                                         />
                                     ))}
                                 </div>
@@ -64,7 +76,10 @@ const handleClick = (windowName) => {
                             <div className={classes.Info__Block_Item}>Память
                                 <div className={classes.Item__info}>
                                     {capacity.map((capacity, index) => (
-                                        <div onClick={() => handleCapClick(index)}>{capacity}</div>
+                                        <div
+                                            className={selectedCapacityBorder === index ? classes.ActiveBlock : 'div'}
+                                            onClick={() => handleBothClick(index)}
+                                        >{capacity}</div>
                                     ))}
                                 </div>
                             </div>
@@ -108,9 +123,9 @@ const handleClick = (windowName) => {
                         <div className={classes.Bottom__Block}>
                             <ul className={classes.Bottom__Block_Title}>
                                 <li className={`${selectedWindow === 'info1' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                    onClick={() => handleClick('info1')}>Description</li>
+                                    onClick={() => handleWindowClick('info1')}>Description</li>
                                 <li className={`${selectedWindow === 'info2' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                    onClick={() => handleClick('info2')}>Properties</li>
+                                    onClick={() => handleWindowClick('info2')}>Properties</li>
                             </ul>
                             <div className={classes.Bottom__Block_Content}>
                                 {selectedWindow === 'info1' && (
@@ -125,7 +140,7 @@ const handleClick = (windowName) => {
                                             <h1>Артикул(ы)</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '</p>
+                                            <pre>' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' '</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -133,7 +148,7 @@ const handleClick = (windowName) => {
                                             <h1>Цвет</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{colors}</p>
+                                            <pre>{colors}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -141,7 +156,7 @@ const handleClick = (windowName) => {
                                             <h1>Ëмкость</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{capacity}</p>
+                                            <pre>{capacity}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -149,7 +164,7 @@ const handleClick = (windowName) => {
                                             <h1>Дисплей</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.display}</p>
+                                            <pre>{item.display}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -157,7 +172,7 @@ const handleClick = (windowName) => {
                                             <h1>Размеры и вес</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.size_and_weight}</p>
+                                            <pre>{item.size_and_weight}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -165,7 +180,7 @@ const handleClick = (windowName) => {
                                             <h1>Защита от воды и пыли</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.resistant}</p>
+                                            <pre>{item.resistant}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -173,7 +188,7 @@ const handleClick = (windowName) => {
                                             <h1>Чип</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.chip}</p>
+                                            <pre>{item.chip}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -181,7 +196,7 @@ const handleClick = (windowName) => {
                                             <h1>Фото и видео</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.camera}</p>
+                                            <pre>{item.camera}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -189,7 +204,7 @@ const handleClick = (windowName) => {
                                             <h1>Безопасность</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.safety}</p>
+                                            <pre>{item.safety}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -197,7 +212,7 @@ const handleClick = (windowName) => {
                                             <h1>Сеть</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.cellular_and_wireless}</p>
+                                            <pre>{item.cellular_and_wireless}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -205,7 +220,7 @@ const handleClick = (windowName) => {
                                             <h1>Аудио</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.audio}</p>
+                                            <pre>{item.audio}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -213,7 +228,7 @@ const handleClick = (windowName) => {
                                             <h1>Порт</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <p>{item.port}</p>
+                                            <pre>{item.port}</pre>
                                         </div>
                                     </div>
                                 </div>

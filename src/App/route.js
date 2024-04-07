@@ -1,12 +1,10 @@
 export function route(item) {
-     if (item.category === 'MacBook') {
+     if (item.category === 'Mac') {
         return `/Mac/${item.id}`;
     } else if (item.category === 'iPad') {
         return `/Ipad/${item.id}`;
     } else if (item.category === 'iMac') {
-        return `/Imac/${item.id}`;
-    } else if (item.category === 'iPad') {
-        return `/Ipad/${item.id}`;
+        return `/Mac/${item.id}`;
     } else if (item.category === 'Watch') {
         return `/Watch/${item.id}`;
     } else if (item.category === 'AirPods') {

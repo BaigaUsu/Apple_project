@@ -1,47 +1,48 @@
 import classes from './AllPages.module.scss'
-import { Link, useLoaderData} from 'react-router-dom';
+import { Link, NavLink, useLoaderData} from 'react-router-dom';
 import { Icon } from '../../components/Icon/Icon';
 import { Button } from '../../components/Button/Button';
 import { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 
-export function Ipad() {
+export function Mac() {
     const item = useLoaderData();
     const colors = item.colors.map(color => color.color);
     const icons = item.colors.map(color => color.color_image);
+
+//----------------------- КНОПКА ИКОНКИ ДЛЯ ПЕРЕКЛЮЧЕНИЯ КАРТИНОК И ВЫДЕЛЕНИЕ БЛОКОВ -----------------------
     const img = item.colors.map(img => img.product_images[0].product_image)
-    const capacity = item.capacities_and_prices.map(cap => cap.capacity)
-    const price = item.capacities_and_prices.map(price => price.price)
+    const img_1 = item.colors[0].product_images;
+    const img_2 = item.colors[1].product_images;
 
-    const [selectedBlock, setSelectedBlock] = useState(0);
-
+    const [currentButtomImage, setcurrentButtomImage] = useState(img_1);
+    const [currentButtomImage_2, setcurrentButtomImage_2] = useState(img_2);
     const [currentImage, setCurrentImage] = useState(img[0]);
-    const [selectedIconBorder, setSelectedIconBorder] = useState(0);
-    const [currentPrice, setCurrentPrice] = useState(price[0]);
-    const [selectedCapacityBorder, setSelectedCapacityBorder] = useState(0);
-
-    const handleCapacityClick = (index) => {
-        setCurrentPrice(price[index]);
+    const [selectedBlock, setSelectedBlock] = useState(0);
+    const handleAllClick = (index) => {
+        setCurrentImage(img[index]);
+        setcurrentButtomImage(item.colors[index].product_images);
+        setcurrentButtomImage_2(item.colors[index].product_images);
+        setSelectedBlock(index);
     };
-
-    const handleBothClick = (index) => {
-        setSelectedCapacityBorder(index);
-        handleCapacityClick(index);
-    };
-
-    const handleColorClick = (index) => {
-    setCurrentImage(img[index]);
-    };
-
-    const hadnleImageBorderClick = (index) => {
-        setSelectedIconBorder(index);
-        handleColorClick(index);
+    const hadnleIconClick = (index) => {
+        handleAllClick(index);
     }
+//----------------------------------------------------------------------------------
 
+//----------------------- КНОПКА САМИХ КАРТИНОК ДЛЯ ИХ ВЫБОРА -----------------------------------
+    const [currImage, setCurrImage] = useState(currentButtomImage[0].product_image);
+    const handleImageClick = (image) => {
+        setCurrentImage(image.product_image);
+    };
+//----------------------------------------------------------------------------------
+
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК НИЖНЕГО БЛОКА --------------------------------------
     const [selectedWindow, setSelectedWindow] = useState('info2');
     const handleWindowClick = (windowName) => {
-    setSelectedWindow(windowName);
+        setSelectedWindow(windowName);
     };
+//----------------------------------------------------------------------------------
 
   return (
     <div className={classes.App}>
@@ -54,8 +55,22 @@ export function Ipad() {
                         <div className={classes.Image__Block_Upper}>
                             <img src={currentImage} alt="Main product image" />
                         </div>
-                        <div className={classes.Image__Block_Bottom}>
-                            <img src={currentImage} alt={currentImage + ' photo'}/>
+                        <div>
+                            <Icon name={'slide_left'}/>
+                        </div>
+                        <div>
+                            <div className={classes.Image__Block_Bottom}>
+                            {currentButtomImage.map((img, index) => (
+                                <img
+                                    key={index}
+                                    src={img.product_image}
+                                    onClick={() => handleImageClick(img)}
+                                    alt={img.product_image + ' photo'}
+                                />
+                            ))}</div>
+                        </div>
+                        <div>
+                            <Icon name={'right'}/>
                         </div>
                     </div>
                     <div className={classes.Info__Block}>
@@ -68,29 +83,36 @@ export function Ipad() {
                                     key={index}
                                     src={icon}
                                     alt={`Color ${index + 1}`}
-                                    className={selectedIconBorder === index ? classes.ActiveBlock : 'img'}
-                                    onClick={() => hadnleImageBorderClick(index)}
+                                    className={selectedBlock === index ? classes.ActiveBlock : 'img'}
+                                    onClick={() => hadnleIconClick(index)}
                                     />
                                 ))}
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Память
                             <div className={classes.Item__info}>
-                                {capacity.map((capacity, index) => (
-                                    <div key={index}
-                                        className={selectedCapacityBorder === index ? classes.ActiveBlock : 'div'}
-                                        onClick={() => handleBothClick(index)}
-                                    >{capacity}</div>
+                                <div>{item.storage}</div>
+                            </div>
+                        </div>
+                        <div className={classes.Info__Block_Item}>Раскладка клавиатуры
+                            <div className={classes.Item__info}>
+                                {item.keyboard_type.map((type, index) => (
+                                    <div key={index}>{type}</div>
                                 ))}
                             </div>
                         </div>
-                        <div className={classes.Info__Block_Item}>Возможности подключения
+                        <div className={classes.Info__Block_Item}>Оперативная память
                             <div className={classes.Item__info}>
-                                <div>{item.connect_type}</div>
+                                <div>{item.memory}</div>
+                            </div>
+                        </div>
+                        <div className={classes.Info__Block_Item}>Процессор
+                            <div className={classes.Item__info}>
+                                <div>{item.processor}</div>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>
-                            <div className={classes.Price}>{currentPrice}</div>
+                            <div className={classes.Price}>{item.price} сом</div>
                         </div>
                         <div className={classes.Info__Block_Item}>
                             <div className={classes.Buttons}>
@@ -119,6 +141,7 @@ export function Ipad() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div className={classes.Bottom__Block}>
                         <ul className={classes.Bottom__Block_Title}>
@@ -140,7 +163,7 @@ export function Ipad() {
                                         <h1>Артикул(ы)</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>``````````````````````````````````````````````````````````````</pre>
+                                        <pre></pre>
                                     </div>
                                 </div>
                                 <div className={classes.Properties__Item}>
@@ -156,7 +179,15 @@ export function Ipad() {
                                         <h1>Ёмкость</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>{capacity}</pre>
+                                        <pre>{item.storage}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Вычислительные ресурсы</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.computing_resources}</pre>
                                     </div>
                                 </div>
                                 <div className={classes.Properties__Item}>
@@ -177,46 +208,6 @@ export function Ipad() {
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Совместимость</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.chip}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Чип</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.camera}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Фото и видео</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.cellular_and_wireless}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Аутентификация</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.authentication}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Сеть</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.audio}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
                                         <h1>Аудио</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
@@ -225,7 +216,15 @@ export function Ipad() {
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Порт</h1>
+                                        <h1>Беспроводная связь</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.wireless}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Порты</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
                                         <pre>{item.port}</pre>
@@ -233,10 +232,18 @@ export function Ipad() {
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Сенсоры</h1>
+                                        <h1>Безопасная аутентификация</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.sensors}</pre>
+                                        <pre>{item.safety}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Питание и аккумулятор</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.battery_and_power}</pre>
                                     </div>
                                 </div>
                             </div>
@@ -249,3 +256,4 @@ export function Ipad() {
     </div>
   );
 }
+
