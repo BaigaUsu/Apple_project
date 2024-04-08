@@ -28,7 +28,7 @@ export function Basket() {
                     </div>
                     <div>{item.name}</div>
                     <div>{item.price}</div>
-                    <img src={item.image} width='200'/>
+                    <img src={item.main_image} width='200'/>
                 </div>
             ))}
         </>
