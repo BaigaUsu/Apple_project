@@ -5,32 +5,31 @@ import { Button } from '../../components/Button/Button';
 import { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 
-export function Mac() {
+export function Vision() {
     const item = useLoaderData();
     const colors = item.colors.map(color => color.color);
     const icons = item.colors.map(color => color.color_image);
+    const capacity = item.capacities_and_prices.map(cap => cap.capacity)
 
-//----------------------- КНОПКА ИКОНКИ ДЛЯ ПЕРЕКЛЮЧЕНИЯ КАРТИНОК И ВЫДЕЛЕНИЕ БЛОКОВ -----------------------
-    const img = item.colors.map(img => img.product_images[0].product_image)
-    const img_1 = item.colors[0].product_images;
-    const img_2 = item.colors[1].product_images;
 
-    const [currentButtomImage, setcurrentButtomImage] = useState(img_1);
-    const [currentButtomImage_2, setcurrentButtomImage_2] = useState(img_2);
-    const [currentImage, setCurrentImage] = useState(img[0]);
-    const [selectedBlock, setSelectedBlock] = useState(0);
-    const handleAllClick = (index) => {
-        setCurrentImage(img[index]);
-        setcurrentButtomImage(item.colors[index].product_images);
-        setcurrentButtomImage_2(item.colors[index].product_images);
-        setSelectedBlock(index);
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ БЛОКОВ ПАМЯТИ И ЦЕНЫ --------------------------------------
+    const price = item.capacities_and_prices.map(price => price.price)
+    const [selectedCapacityBorder, setSelectedCapacityBorder] = useState(0);
+    const [currentPrice, setCurrentPrice] = useState(price[0]);
+    const handleCapacityClick = (index) => {
+        setCurrentPrice(price[index]);
     };
-    const hadnleIconClick = (icon) => {
-        handleAllClick(icon);
-    }
-//----------------------------------------------------------------------------------
+    const handleBothClick = (index) => {
+        setSelectedCapacityBorder(index);
+        handleCapacityClick(index);
+    };
+//-----------------------------------------------------------------------------
 
 //----------------------- КНОПКА САМИХ КАРТИНОК ДЛЯ ИХ ВЫБОРА -----------------------------------
+const img_1 = item.colors[0].product_images;
+const img = item.colors.map(img => img.product_images[0].product_image)
+    const [currentImage, setCurrentImage] = useState(img[0]);
+    const [currentButtomImage, setcurrentButtomImage] = useState(img_1);
     const [currImage, setCurrImage] = useState(currentButtomImage[0].product_image);
     const handleImageClick = (image) => {
         setCurrentImage(image.product_image);
@@ -60,7 +59,7 @@ export function Mac() {
                     <ul>
                         <li><Link to="/" className={classes.Link}><Icon name={'home'}/></Link></li>
                         <p></p>
-                        <li><Link to='/Items?category=Mac' className={classes.Link}>{item.category} </Link></li>
+                        <li><Link to='/Items?category=Gadget' className={classes.Link}>{item.category} </Link></li>
                         <p></p>
                         <li>{item.name}</li>
                     </ul>
@@ -70,7 +69,7 @@ export function Mac() {
                         <div className={classes.Image__Block_Upper}>
                             <img src={currentImage} alt="Main product image" />
                         </div>
-                        <div>
+                        <div className={classes.Arrow}>
                             <Icon name={'slide_left'}/>
                         </div>
                         <div>
@@ -93,30 +92,17 @@ export function Mac() {
                         <h1>{item.name}</h1>
                         <div className={classes.Info__Block_Item}>Цвет
                             <div className={classes.Item__info}>
-                               {icons.map((icon, index) => (
-                                    <img
-                                    key={index}
-                                    src={icon}
-                                    alt={`Color ${index + 1}`}
-                                    className={selectedBlock === index ? classes.ActiveBlock : 'img'}
-                                    onClick={() => hadnleIconClick(index)}
-                                    />
-                                ))}
+                                    <img src={icons} alt={icons} className={classes.ActiveBlock}/>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Память
                             <div className={classes.Item__info}>
-                                <div className={classes.ActiveBlock}>{item.storage}</div>
-                            </div>
-                        </div>
-                        <div className={classes.Info__Block_Item}>Раскладка клавиатуры
-                            <div className={classes.Item__info}>
-                                {item.keyboard_type.map((type, index) => (
-                                    <div
-                                        onClick={() => handleLangClick(index)}
-                                        className={selectLang === index ? classes.ActiveBlock : 'div'}
-                                        key={index}>{type}</div>
-                                ))}
+                                {capacity.map((capacity, index) => (
+                                        <div
+                                            className={selectedCapacityBorder === index ? classes.ActiveBlock : 'div'}
+                                            onClick={() => handleBothClick(index)}
+                                        >{capacity}</div>
+                                    ))}
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Оперативная память
@@ -130,7 +116,7 @@ export function Mac() {
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>
-                            <div className={classes.Price}>{item.price} сом</div>
+                            <div className={classes.Price}>{currentPrice} сом</div>
                         </div>
                         <div className={classes.Info__Block_Item}>
                             <div className={classes.Buttons}>
@@ -159,7 +145,6 @@ export function Mac() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className={classes.Bottom__Block}>
                         <ul className={classes.Bottom__Block_Title}>
@@ -197,15 +182,7 @@ export function Mac() {
                                         <h1>Ёмкость</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.storage}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Вычислительные ресурсы</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.computing_resources}</pre>
+                                        <pre>{capacity}</pre>
                                     </div>
                                 </div>
                                 <div className={classes.Properties__Item}>
@@ -218,15 +195,47 @@ export function Mac() {
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Размеры и вес</h1>
+                                        <h1>Чипы</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.size_and_weight}</pre>
+                                        <pre>{item.chip}</pre>
                                     </div>
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Аудио</h1>
+                                        <h1>Камера</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.camera}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Датчики</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.sensors}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Оптический идентификатор</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.optical_identifier}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Аккумулятор</h1>
+                                    </div>
+                                    <div className={classes.Properties__Item_Info}>
+                                        <pre>{item.battery}</pre>
+                                    </div>
+                                </div>
+                                <div className={classes.Properties__Item}>
+                                    <div className={classes.Properties__Item_Title}>
+                                        <h1>Аудиотехнологии</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
                                         <pre>{item.audio}</pre>
@@ -234,34 +243,10 @@ export function Mac() {
                                 </div>
                                 <div className={classes.Properties__Item}>
                                     <div className={classes.Properties__Item_Title}>
-                                        <h1>Беспроводная связь</h1>
+                                        <h1>Возможность подключения и беспроводная связь</h1>
                                     </div>
                                     <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.wireless}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Порты</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.port}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Безопасная аутентификация</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.safety}</pre>
-                                    </div>
-                                </div>
-                                <div className={classes.Properties__Item}>
-                                    <div className={classes.Properties__Item_Title}>
-                                        <h1>Питание и аккумулятор</h1>
-                                    </div>
-                                    <div className={classes.Properties__Item_Info}>
-                                        <pre>{item.battery_and_power}</pre>
+                                        <pre>{item.connect_wireless}</pre>
                                     </div>
                                 </div>
                             </div>

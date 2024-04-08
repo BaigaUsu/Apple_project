@@ -47,16 +47,21 @@ export function Watch() {
   return (
     <div className={classes.App}>
         <Header/>
-        <Link to="/">home {item.category} {item.name}</Link>
         <div className={classes.Main__Block}>
             <div className={classes.Container}>
+                <div className={classes.Navigation}>
+                    <ul>
+                        <li><Link to="/" className={classes.Link}><Icon name={'home'}/></Link></li>
+                        <p></p>
+                        <li><Link to="/Items?category=Watch" className={classes.Link}>{item.category} </Link></li>
+                        <p></p>
+                        <li>{item.name}</li>
+                    </ul>
+                </div>
                 <div className={classes.Inner_Block}>
                     <div className={classes.Image__Block}>
                         <div className={classes.Image__Block_Upper}>
                             <img src={currentImage} alt="Main product image" />
-                        </div>
-                        <div>
-                            <Icon name={'slide_left'}/>
                         </div>
                         <div>
                             <div className={classes.Image__Block_Bottom}>
@@ -68,9 +73,6 @@ export function Watch() {
                                     alt={img.product_image + ' photo'}
                                 />
                             ))}</div>
-                        </div>
-                        <div>
-                            <Icon name={'right'}/>
                         </div>
                     </div>
                     <div className={classes.Info__Block}>
@@ -91,17 +93,17 @@ export function Watch() {
                         </div>
                         <div className={classes.Info__Block_Item}>Размер корпуса
                             <div className={classes.Item__info}>
-                                <div>{item.size_and_weight}</div>
+                                <div className={classes.ActiveBlock}>{item.size_and_weight}</div>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Возможности подключения
                             <div className={classes.Item__info}>
-                                    <div>{item.connect_type}</div>
+                                <div className={classes.ActiveBlock}>{item.connect_type}</div>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Модель
                             <div className={classes.Item__info}>
-                                <div>{item.watch_model}</div>
+                                <div className={classes.ActiveBlock}>{item.watch_model}</div>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>
@@ -109,9 +111,9 @@ export function Watch() {
                         </div>
                         <div className={classes.Info__Block_Item}>
                             <div className={classes.Buttons}>
-                                <Button text={'Buy'} className={classes.Btn}/>
-                                <Link className={classes.Btn_2}>Apply for a loan</Link>
-                                <Link className={classes.Btn_2}>Reserve</Link>
+                                <Button text={'Купить'} className={classes.Btn}/>
+                                <Link className={classes.Btn_2}>Оформить в кредит</Link>
+                                <Link className={classes.Btn_2}>Забронировать</Link>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Основные характеристики
@@ -134,14 +136,13 @@ export function Watch() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className={classes.Bottom__Block}>
                         <ul className={classes.Bottom__Block_Title}>
                             <li className={`${selectedWindow === 'info1' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                onClick={() => handleWindowClick('info1')}>Description</li>
+                                onClick={() => handleWindowClick('info1')}>Описание</li>
                             <li className={`${selectedWindow === 'info2' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                onClick={() => handleWindowClick('info2')}>Properties</li>
+                                onClick={() => handleWindowClick('info2')}>Характеристики</li>
                         </ul>
                         <div className={classes.Bottom__Block_Content}>
                             {selectedWindow === 'info1' && (

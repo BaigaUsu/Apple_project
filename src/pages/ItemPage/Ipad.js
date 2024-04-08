@@ -13,48 +13,57 @@ export function Ipad() {
     const capacity = item.capacities_and_prices.map(cap => cap.capacity)
     const price = item.capacities_and_prices.map(price => price.price)
 
-    const [selectedBlock, setSelectedBlock] = useState(0);
-
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ИКОНОК И КАРТИНОК --------------------------------------
     const [currentImage, setCurrentImage] = useState(img[0]);
     const [selectedIconBorder, setSelectedIconBorder] = useState(0);
+    const handleIconClick = (index) => {
+    setCurrentImage(img[index]);
+    };
+    const hadnleImageBorderClick = (index) => {
+        setSelectedIconBorder(index);
+        handleIconClick(index);
+    }
+//-----------------------------------------------------------------------------
+
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ БЛОКОВ ПАМЯТИ И ЦЕНЫ --------------------------------------
     const [currentPrice, setCurrentPrice] = useState(price[0]);
     const [selectedCapacityBorder, setSelectedCapacityBorder] = useState(0);
-
     const handleCapacityClick = (index) => {
         setCurrentPrice(price[index]);
     };
-
     const handleBothClick = (index) => {
         setSelectedCapacityBorder(index);
         handleCapacityClick(index);
     };
+//-----------------------------------------------------------------------------
 
-    const handleColorClick = (index) => {
-    setCurrentImage(img[index]);
-    };
-
-    const hadnleImageBorderClick = (index) => {
-        setSelectedIconBorder(index);
-        handleColorClick(index);
-    }
-
+//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК НИЖНЕГО БЛОКА --------------------------------------
     const [selectedWindow, setSelectedWindow] = useState('info2');
-    const handleWindowClick = (windowName) => {
-    setSelectedWindow(windowName);
+        const handleWindowClick = (windowName) => {
+        setSelectedWindow(windowName);
     };
+//----------------------------------------------------------------------------------
 
   return (
     <div className={classes.App}>
         <Header/>
-        <Link to="/">home {item.category} {item.name}</Link>
         <div className={classes.Main__Block}>
             <div className={classes.Container}>
+                <div className={classes.Navigation}>
+                        <ul>
+                            <li><Link to="/" className={classes.Link}><Icon name={'home'}/></Link></li>
+                            <p></p>
+                            <li><Link to="/Items?category=iPad" className={classes.Link}>{item.category} </Link></li>
+                            <p></p>
+                            <li>{item.name}</li>
+                        </ul>
+                    </div>
                 <div className={classes.Inner_Block}>
                     <div className={classes.Image__Block}>
                         <div className={classes.Image__Block_Upper}>
                             <img src={currentImage} alt="Main product image" />
                         </div>
-                        <div className={classes.Image__Block_Bottom}>
+                        <div className={`${classes.Image__Block_Bottom} ${classes.Image__Block_Bottom2}`}>
                             <img src={currentImage} alt={currentImage + ' photo'}/>
                         </div>
                     </div>
@@ -86,7 +95,7 @@ export function Ipad() {
                         </div>
                         <div className={classes.Info__Block_Item}>Возможности подключения
                             <div className={classes.Item__info}>
-                                <div>{item.connect_type}</div>
+                                <div className={classes.ActiveBlock}>{item.connect_type}</div>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>
@@ -94,9 +103,9 @@ export function Ipad() {
                         </div>
                         <div className={classes.Info__Block_Item}>
                             <div className={classes.Buttons}>
-                                <Button text={'Buy'} className={classes.Btn}/>
-                                <Link className={classes.Btn_2}>Apply for a loan</Link>
-                                <Link className={classes.Btn_2}>Reserve</Link>
+                                <Button text={'Купить'} className={classes.Btn}/>
+                                <Link className={classes.Btn_2}>Оформить в кредит</Link>
+                                <Link className={classes.Btn_2}>Забронировать</Link>
                             </div>
                         </div>
                         <div className={classes.Info__Block_Item}>Основные характеристики
@@ -123,9 +132,9 @@ export function Ipad() {
                     <div className={classes.Bottom__Block}>
                         <ul className={classes.Bottom__Block_Title}>
                             <li className={`${selectedWindow === 'info1' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                onClick={() => handleWindowClick('info1')}>Description</li>
+                                onClick={() => handleWindowClick('info1')}>Описание</li>
                             <li className={`${selectedWindow === 'info2' ? classes.Selected : null} ${classes.Bottom__Block_Title_Info}`}
-                                onClick={() => handleWindowClick('info2')}>Properties</li>
+                                onClick={() => handleWindowClick('info2')}>Характеристики</li>
                         </ul>
                         <div className={classes.Bottom__Block_Content}>
                             {selectedWindow === 'info1' && (

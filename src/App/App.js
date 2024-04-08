@@ -15,6 +15,8 @@ import { Ipad } from '../pages/ItemPage/Ipad';
 import { loadAppleList } from '../Api/loadAppleList';
 import { loadAppleItem } from '../Api/loadAppleItem';
 import { Watch } from '../pages/ItemPage/Watch';
+import { AirPods } from '../pages/ItemPage/AirPods';
+import { Vision } from '../pages/ItemPage/Vision';
 export function App() {
     const router = createHashRouter([
         {
@@ -43,13 +45,6 @@ export function App() {
             }
         },
         {
-            path: "/Mac/:id",
-            element: <Mac/>,
-            loader: async ({params}) => {
-                return loadAppleItem(params.id)
-            }
-        },
-        {
             path: "/Ipad/:id",
             element: <Ipad/>,
             loader: async ({params}) => {
@@ -57,8 +52,29 @@ export function App() {
             }
         },
         {
+            path: "/Mac/:id",
+            element: <Mac/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
+            }
+        },
+        {
             path: "/Watch/:id",
             element: <Watch/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
+            }
+        },
+        {
+            path: "/AirPods/:id",
+            element: <AirPods/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
+            }
+        },
+        {
+            path: "/Vision/:id",
+            element: <Vision/>,
             loader: async ({params}) => {
                 return loadAppleItem(params.id)
             }
@@ -75,7 +91,7 @@ export function App() {
 ])
   return (
     <Provider store={store}>
-            <RouterProvider router={router}/>
-        </Provider>
+        <RouterProvider router={router}/>
+    </Provider>
   );
 }

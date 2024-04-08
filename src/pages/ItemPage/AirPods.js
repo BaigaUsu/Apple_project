@@ -2,33 +2,14 @@ import classes from './AllPages.module.scss'
 import { Link, useLoaderData} from 'react-router-dom';
 import { Icon } from '../../components/Icon/Icon';
 import { Button } from '../../components/Button/Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 
-export function ItemIphone() {
+export function AirPods() {
     const item = useLoaderData();
     const colors = item.colors.map(color => color.color);
     const icons = item.colors.map(color => color.color_image);
-    const capacity = item.capacities_and_prices.map(cap => cap.capacity)
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            left: 0,
-        })
-    }, [])
 
-//----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ БЛОКОВ ПАМЯТИ И ЦЕНЫ --------------------------------------
-    const price = item.capacities_and_prices.map(price => price.price)
-    const [selectedCapacityBorder, setSelectedCapacityBorder] = useState(0);
-    const [currentPrice, setCurrentPrice] = useState(price[0]);
-    const handleCapacityClick = (index) => {
-        setCurrentPrice(price[index]);
-    };
-    const handleBothClick = (index) => {
-        setSelectedCapacityBorder(index);
-        handleCapacityClick(index);
-    };
-//-----------------------------------------------------------------------------
 
 //----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ИКОНОК И КАРТИНОК --------------------------------------
     const img = item.colors.map(img => img.product_images[0].product_image)
@@ -41,7 +22,7 @@ export function ItemIphone() {
         setSelectedIconBorder(index);
         handleIconClick(index);
     }
-
+//----------------------------------------------------------------------------------
 
 //----------------------- КНОПКА ДЛЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК НИЖНЕГО БЛОКА --------------------------------------
     const [selectedWindow, setSelectedWindow] = useState('info2');
@@ -59,7 +40,7 @@ export function ItemIphone() {
                     <ul>
                         <li><Link to="/" className={classes.Link}><Icon name={'home'}/></Link></li>
                         <p></p>
-                        <li><Link to="/Items?category=iPhone" className={classes.Link}>{item.category} </Link></li>
+                        <li><Link to="/Items?category=AirPods" className={classes.Link}>{item.category} </Link></li>
                         <p></p>
                         <li>{item.name}</li>
                     </ul>
@@ -89,23 +70,13 @@ export function ItemIphone() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={classes.Info__Block_Item}>Память
-                                <div className={classes.Item__info}>
-                                    {capacity.map((capacity, index) => (
-                                        <div
-                                            className={selectedCapacityBorder === index ? classes.ActiveBlock : 'div'}
-                                            onClick={() => handleBothClick(index)}
-                                        >{capacity}</div>
-                                    ))}
-                                </div>
-                            </div>
                             <div className={classes.Info__Block_Item}>Модель
                                 <div className={classes.Item__info}>
-                                    <div className={classes.ActiveBlock}>{item.sim_model}</div>
+                                    <div className={classes.ActiveBlock}>{item.port_model}</div>
                                 </div>
                             </div>
                             <div className={classes.Info__Block_Item}>
-                                <div className={classes.Price}>{currentPrice} сом</div>
+                                <div className={classes.Price}>{item.price} сом</div>
                             </div>
                             <div className={classes.Info__Block_Item}>
                                 <div className={classes.Buttons}>
@@ -169,34 +140,26 @@ export function ItemIphone() {
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Ëмкость</h1>
+                                            <h1>Аудио­технологии</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{capacity}</pre>
+                                            <pre>{item.audio}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Дисплей</h1>
+                                            <h1>Датчики</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.display}</pre>
+                                            <pre>{item.sensors}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Размеры и вес</h1>
+                                            <h1>Микрофоны</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.size_and_weight}</pre>
-                                        </div>
-                                    </div>
-                                    <div className={classes.Properties__Item}>
-                                        <div className={classes.Properties__Item_Title}>
-                                            <h1>Защита от воды и пыли</h1>
-                                        </div>
-                                        <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.resistant}</pre>
+                                            <pre>{item.microphones}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
@@ -209,42 +172,34 @@ export function ItemIphone() {
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Фото и видео</h1>
+                                            <h1>Защита от пота и воды</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.camera}</pre>
+                                            <pre>----------</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Безопасность</h1>
+                                            <h1>Возможности подключения</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.safety}</pre>
+                                            <pre>{item.connect_type}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Сеть</h1>
+                                            <h1>Комплект поставки</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.cellular_and_wireless}</pre>
+                                            <pre>{item.complete_set}</pre>
                                         </div>
                                     </div>
                                     <div className={classes.Properties__Item}>
                                         <div className={classes.Properties__Item_Title}>
-                                            <h1>Аудио</h1>
+                                            <h1>Универсальный доступ</h1>
                                         </div>
                                         <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.audio}</pre>
-                                        </div>
-                                    </div>
-                                    <div className={classes.Properties__Item}>
-                                        <div className={classes.Properties__Item_Title}>
-                                            <h1>Порт</h1>
-                                        </div>
-                                        <div className={classes.Properties__Item_Info}>
-                                            <pre>{item.port}</pre>
+                                            <pre>{item.universal_access}</pre>
                                         </div>
                                     </div>
                                 </div>

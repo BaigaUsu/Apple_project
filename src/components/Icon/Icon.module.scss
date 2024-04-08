@@ -50,4 +50,9 @@
         margin: auto;
         cursor: pointer;
     }
+
+    &_home {
+        background-image: url(images/home.svg);
+        height: 15px;
+    }
 }
