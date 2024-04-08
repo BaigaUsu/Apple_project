@@ -2,7 +2,7 @@
   "name": "apple_kg",
   "version": "1.0.0",
   "description": "",
-  "homepage": "http://baigausu.github.io/Apple_project",
+  "homepage": "http://BaigaUsu.github.io/Apple_project",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",

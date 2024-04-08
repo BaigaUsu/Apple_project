@@ -1,0 +1,37 @@
+@import '../../../helpers/Container.module.scss';
+@import '../../../assets/fonts.scss';
+@import './Menu_nav_1.module.scss';
+
+* {
+    box-sizing: border-box;
+}
+.Input {
+    padding-top: 32px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 32px;
+    margin-left: 32px;
+    background-color: transparent;
+    border: none;
+    border-color: transparent;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    line-height: 1.1666666667;
+    font-weight: 500;
+    letter-spacing: .009em;
+    font-family: $font-fam;
+    position: relative;
+    z-index: 1;
+    animation: globalnav-search-input-intro .24s cubic-bezier(.4,0,.6,1) .2s both;
+    color: white;
+    outline:none;
+}
+.Items {
+    color: white;
+    font-family: $font-fam;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+

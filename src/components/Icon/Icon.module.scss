@@ -55,4 +55,10 @@
         background-image: url(images/home.svg);
         height: 15px;
     }
+
+    &_searchicon {
+        background-image: url(images/searchicon.svg);
+        position: absolute;
+        top: 35px;
+    }
 }
