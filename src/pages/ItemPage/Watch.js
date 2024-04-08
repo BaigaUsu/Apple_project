@@ -3,7 +3,7 @@ import { Link, NavLink, useLoaderData} from 'react-router-dom';
 import { Icon } from '../../components/Icon/Icon';
 import { Button } from '../../components/Button/Button';
 import { useState } from 'react';
-import { Header } from '../../components/Header/Header';
+import { Header } from '../../components/Test/Header';
 
 export function Watch() {
     const item = useLoaderData();
