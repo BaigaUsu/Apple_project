@@ -1,1 +1,1 @@
-export const appleApiURL = 'https://e21f1405401110ebf8c6b83c467b2bfe.serveo.net/api/products/';
+export const appleApiURL = 'https://61c73337b4facdc0dbac194bf3c37073.serveo.net/api/products/';
