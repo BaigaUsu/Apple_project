@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Slider } from "../../components/Slider/Slider"
 import { Section_1 } from "../../components/Main/Section_1"
 import classes from './Home.module.scss'
@@ -7,7 +7,12 @@ import { Header } from "../../components/Header/Header"
 
 
 export function Home() {
-
+    // useEffect(() => {
+    //     window.scrollTo({
+    //         top: 0,
+    //         left: 0,
+    //     })
+    // }, [])
     return (
         <div className={classes.Main__Container}>
             <Header/>

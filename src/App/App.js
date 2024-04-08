@@ -9,7 +9,6 @@ import { Garantee } from '../pages/Garantee/Garantee';
 import { Items } from '../pages/Items/Items';
 import { ItemIphone } from '../pages/ItemPage/ItemIphone';
 import { randomItems } from '../helpers/Utils';
-import { Basket } from '../components/Header/nav_1/Basket';
 import { Mac } from '../pages/ItemPage/Mac';
 import { Ipad } from '../pages/ItemPage/Ipad';
 import { loadAppleList } from '../Api/loadAppleList';
@@ -17,6 +16,8 @@ import { loadAppleItem } from '../Api/loadAppleItem';
 import { Watch } from '../pages/ItemPage/Watch';
 import { AirPods } from '../pages/ItemPage/AirPods';
 import { Vision } from '../pages/ItemPage/Vision';
+import { Basket } from '../components/Header/nav_1/Basket';
+// import { SearchResults } from '../components/header/nav_1/SearchResults';
 export function App() {
     const router = createHashRouter([
         {
@@ -79,6 +80,11 @@ export function App() {
                 return loadAppleItem(params.id)
             }
         },
+        // {
+        //     path:"/SearchResults",
+        //     element:<SearchResults/>,
+        //     loader: loadAppleList,
+        // },
         {
             path: '/Basket',
             element: <Basket />,

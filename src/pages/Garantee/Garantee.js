@@ -1,5 +1,5 @@
 import React from "react"
-import { Header } from "../../components/Test/Header"
+import { Header } from "../../components/Header/Header"
 
 export function Garantee() {
     return (
