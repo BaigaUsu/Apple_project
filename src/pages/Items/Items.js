@@ -26,37 +26,45 @@ export function Items() {
     return (
         <div className={classes.Items}>
             <Header/>
-            <Link to="/">home {category}</Link>
-            <div className={classes.Title__Block}>
-                <h1 className={classes.Title__Block_Item}>{category}</h1>
-            </div>
-            <div className={classes.Main__Block}>
-                <div className={classes.Container}>
-                    <div className={classes.Inner__Block}>
-                        {filteredItems.map(item => (
-                            <div
-                                className={classes.Item__Block}
-                                key={item.id}
-                            >
-                                <div className={classes.Item__Block_Link}
-                                    onClick={() => {
-                                        navigate(route(item));
-                                    }}>
-                                    <img src={item.colors[0].product_images[0].product_image} />
-                                    <h5>{item.name}</h5>
-                                    <Button text="choose" />
-                                </div>
-                                <div className={classes.favourite}
-                                    onClick={() => {
-                                        dispatch(toggleItemFavorite({ id: item.id }));
-                                    }}
+            <div className={classes.Container}>
+                <div className={classes.Navigation}>
+                    <ul>
+                        <li><Link to="/" className={classes.Link}><Icon name={'home'}/></Link></li>
+                        <p></p>
+                        <li>{category}</li>
+                    </ul>
+                </div>
+                <div className={classes.Title__Block}>
+                    <h1 className={classes.Title__Block_Item}>{category}</h1>
+                </div>
+                <div className={classes.Main__Block}>
+                    <div className={classes.Container}>
+                        <div className={classes.Inner__Block}>
+                            {filteredItems.map(item => (
+                                <div
+                                    className={classes.Item__Block}
+                                    key={item.id}
                                 >
-                                    <Icon
-                                        name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
-                                    />
+                                    <div className={classes.Item__Block_Link}
+                                        onClick={() => {
+                                            navigate(route(item));
+                                        }}>
+                                        <img src={item.colors[0].product_images[0].product_image} />
+                                        <h5>{item.name}</h5>
+                                        <Button text="choose" />
+                                    </div>
+                                    <div className={classes.favourite}
+                                        onClick={() => {
+                                            dispatch(toggleItemFavorite({ id: item.id }));
+                                        }}
+                                    >
+                                        <Icon
+                                            name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
