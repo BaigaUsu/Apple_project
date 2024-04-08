@@ -2,8 +2,6 @@ import React from 'react';
 import classes from './Menu_nav_1.module.scss'
 import { NavLink } from 'react-router-dom';
 import { Search_bar } from './Search_bar';
-import clsx from 'clsx';
-import { Basket } from './Basket';
 
 
 export function Menu_nav_1() {
