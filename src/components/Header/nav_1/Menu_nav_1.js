@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classes from './Menu_nav_1.module.scss';
 import { NavLink } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
+import { Icon } from '../../Icon/Icon';
 
 export function Menu_nav_1() {
 
@@ -72,7 +73,7 @@ export function Menu_nav_1() {
                     <button type="submit" onClick={handleSearchBarClick}></button>
                     <li>
                         <NavLink to='/Basket' className={classes.elem_item}>
-                            hello
+                            <Icon name={'Basket'}/>
                         </NavLink>
                     </li>
                 </ul>

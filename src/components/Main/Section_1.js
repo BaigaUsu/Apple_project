@@ -53,7 +53,7 @@ export function Section_1() {
                             </div>
                             <div onClick={() => {dispatch(toggleItemFavorite({ id: item.id }))}}>
                                 <Icon
-                                    name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                                    name={isFavorite(item.id) ? 'fullBasket' : 'emptyBasket'}
                                 />
                             </div>
                         </div>

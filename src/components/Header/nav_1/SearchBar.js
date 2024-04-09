@@ -35,12 +35,16 @@ export function SearchBar() {
     }, []);
 
     useEffect(() => {
-        const filtered = products.filter(product =>
+        const filteredStartsWith = products.filter(product =>
             product.name.toLowerCase().startsWith(searchQuery.toLowerCase())
-        ).slice(0, 5);
-        setFilteredProducts(filtered);
+        );
+        const filteredIncludes = products.filter(product =>
+            !product.name.toLowerCase().startsWith(searchQuery.toLowerCase()) && // исключаем те, которые уже попали в filteredStartsWith
+            product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        const combinedFilteredProducts = [...filteredStartsWith, ...filteredIncludes].slice(0, 5);
+        setFilteredProducts(combinedFilteredProducts);
     }, [searchQuery, products]);
-
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };

@@ -59,7 +59,7 @@ export function Items() {
                                         }}
                                     >
                                         <Icon
-                                            name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                                            name={isFavorite(item.id) ? 'fullBasket' : 'emptyBasket'}
                                         />
                                     </div>
                                 </div>

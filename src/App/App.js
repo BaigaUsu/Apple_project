@@ -17,7 +17,7 @@ import { Watch } from '../pages/ItemPage/Watch';
 import { AirPods } from '../pages/ItemPage/AirPods';
 import { Vision } from '../pages/ItemPage/Vision';
 import { Basket } from '../components/Header/nav_1/Basket';
-import { SearchBar } from '../components/Header/nav_1/SearchBar';
+import { Accessories } from '../pages/ItemPage/Accessories';
 export function App() {
     const router = createHashRouter([
         {
@@ -76,6 +76,13 @@ export function App() {
         {
             path: "/Vision/:id",
             element: <Vision/>,
+            loader: async ({params}) => {
+                return loadAppleItem(params.id)
+            }
+        },
+        {
+            path: "/Accessories/:id",
+            element: <Accessories/>,
             loader: async ({params}) => {
                 return loadAppleItem(params.id)
             }

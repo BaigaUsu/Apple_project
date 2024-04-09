@@ -5,6 +5,7 @@ import { Icon } from '../Icon/Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleItemFavorite } from '../../store/action';
 import { route } from '../../App/route';
+import { useMemo } from 'react';
 
 export function Section_2() {
     const navigate = useNavigate()
@@ -13,7 +14,9 @@ export function Section_2() {
     const favoriteItems = useSelector(state => state.favorites);
     const isFavorite = (id) => favoriteItems.includes(id);
     const { item } = useLoaderData();
-    const iphoneItems = item.filter(item => item.category === 'iPhone');
+    const iphoneItems = useMemo(() => {
+        return item.filter(item => item.category === 'iPhone');
+    }, [iphoneItems]);
     return (
         <div className={classes.Main__Block}>
             <div className={classes.Inner__Block}>
@@ -59,7 +62,7 @@ export function Section_2() {
                             </div>
                             <div onClick={() => {dispatch(toggleItemFavorite({ id: item.id }))}}>
                                 <Icon
-                                    name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                                    name={isFavorite(item.id) ? 'fullBasket' : 'emptyBasket'}
                                 />
                             </div>
                             <div className={classes.Image}

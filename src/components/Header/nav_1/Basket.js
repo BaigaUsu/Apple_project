@@ -23,7 +23,7 @@ export function Basket() {
                         }}
                     >
                         <Icon
-                            name={isFavorite(item.id) ? 'heart' : 'heartOutline'}
+                            name={isFavorite(item.id) ? 'fullBasket' : 'emptyBasket'}
                         />
                     </div>
                     <div>{item.name}</div>
