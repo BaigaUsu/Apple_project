@@ -2,7 +2,7 @@ import classes from './AllPages.module.scss'
 import { Link, useLoaderData } from 'react-router-dom';
 import { Icon } from '../../components/Icon/Icon';
 import { Button } from '../../components/Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 
 export function Mac() {
@@ -50,6 +50,12 @@ export function Mac() {
         setSelectLang(lang)
     }
 //----------------------------------------------------------------------------------
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+        })
+    }, [])
 
   return (
     <div className={classes.App}>
