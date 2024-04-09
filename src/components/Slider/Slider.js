@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import 'swiper/css';
 import { useNavigate } from 'react-router-dom';
+import { route } from '../../App/route';
 
 
 export function Slider() {
@@ -43,7 +44,7 @@ export function Slider() {
                         <img className={styles.slidesImage}
                             src={image.upper_scroll_image}
                             onClick={() => {
-                                navigate(`/Items/${image.id}`);
+                                navigate(route(image));
                                 }}/>
                     </SwiperSlide>
                 ))}

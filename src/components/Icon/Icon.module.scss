@@ -61,4 +61,12 @@
         position: absolute;
         top: 35px;
     }
+
+    &_rightbtn {
+        background-color: url(images/rightbtn.svg);
+        position: absolute;
+        top: 30px;
+        width: 10px;
+        height: 10px;
+    }
 }

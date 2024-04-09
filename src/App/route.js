@@ -9,7 +9,7 @@ export function route(item) {
         return `/Watch/${item.id}`;
     } else if (item.category === 'AirPods') {
         return `/AirPods/${item.id}`;
-    } else if (item.category === 'Gadget') {
+    } else if (item.category === 'Vision') {
         return `/Vision/${item.id}`;
     } else if (item.category === 'Accessories') {
         return `/Accessories/${item.id}`;

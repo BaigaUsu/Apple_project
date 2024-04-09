@@ -1,0 +1,143 @@
+@import '../../assets/colors.scss';
+@import '../../assets/fonts.scss';
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.Main__Block {
+    margin-top: 1.5rem;
+
+    & .Inner__Block {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 15px;
+        width: 100%;
+
+        & .Title__Block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0 15px;
+            word-wrap: break-word;
+
+            & h1 {
+                color: $text_title;
+                font-style: normal;
+                font-size: 50px;
+                line-height: 110%;
+                font-family: $font-fam;
+                font-weight: 500;
+            }
+
+            & h2 {
+                font-weight: 300;
+                font-size: 21px;
+                line-height: 120%;
+                color: $main_text;
+                font-family: $font-fam;
+                margin-top: 0.5rem;
+            }
+
+            &_But {
+                margin-top: 0.5rem;
+                display: flex;
+                text-decoration: none;
+
+                & .Btn {
+                    font-size: 18px;
+                    line-height: 21px;
+                    color: $blue;
+                    margin-left: 0.5rem;
+                    font-family: $font-fam;
+                }
+
+                & .Btn:hover {
+                    text-decoration: underline;
+                }
+
+                & svg {
+                    align-self: center;
+                }
+            }
+        }
+
+        & .Info__Block {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        & .Item__Block {
+            flex: 0 0 25%;
+            max-width: 25%;
+            padding: 0 10px;
+
+            &_Elem {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-content: space-between;
+                background-color: #F5F5F7;
+                padding: 20px 25px;
+                padding: 20px 25px;
+                margin-top: 1rem;
+                cursor: pointer;
+
+                & h3 {
+                    font-weight: normal;
+                    font-size: 20px;
+                    line-height: 120%;
+                    color: $text_title;
+                    margin-bottom: 0.75rem;
+                    font-family: $font-fam;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: auto;
+                }
+
+                & .Elem_Info {
+
+                    &_But {
+                        text-decoration: none;
+                        display: flex;
+
+                        & .Btn2 {
+                            font-weight: normal;
+                            font-size: 15px;
+                            line-height: 18px;
+                            text-transform: lowercase;
+                            color: $blue;
+                            font-family: $font-fam;
+                        }
+
+                        & .Btn2:hover {
+                            text-decoration: underline;
+                        }
+
+                        & svg {
+                            align-self: center;
+                        }
+                    }
+                }
+                & .Image {
+                    text-align: center;
+                    padding-top: 0.5rem;
+                    padding-bottom: 1.5rem;
+                    width: 100%;
+                    cursor: pointer;
+
+                    & img {
+                        width: 100%;
+                        height: auto;
+                        max-height: 270px;
+                        max-width: 187px;
+                    }
+                }
+            }
+        }
+    }
+}
