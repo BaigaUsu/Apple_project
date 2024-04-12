@@ -42,13 +42,6 @@ const img = item.colors.map(img => img.product_images[0].product_image)
         setSelectedWindow(windowName);
     };
 //----------------------------------------------------------------------------------
-
-//--------------------КНОПКА ДЛЯ КЛАВИАТУРЫ----------------------------------------------------
-    const [selectLang, setSelectLang] = useState(0)
-    const handleLangClick = (lang) => {
-        setSelectLang(lang)
-    }
-//----------------------------------------------------------------------------------
     useEffect(() => {
         window.scrollTo({
             top: 0,

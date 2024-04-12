@@ -6,18 +6,20 @@ import { route } from '../../../App/route';
 
 export function SearchBar() {
     const [showSearchBar, setShowSearchBar] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const navigate = useNavigate()
+    const [products, setProducts] = useState([]);
 
+    const navigate = useNavigate()
+//--------------------------- ЗАДЕРЖКА ОТОБРАЖЕНИЯ -----------------------------------
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowSearchBar(true);
         }, 500);
         return () => clearTimeout(timer);
     }, []);
+//--------------------------------------------------------------------------
 
+//--------------------------- ЗАГРУЗКА ДАННЫХ -----------------------------------
     useEffect(() => {
         async function fetchProducts() {
             try {
@@ -33,7 +35,11 @@ export function SearchBar() {
         }
         fetchProducts();
     }, []);
+//--------------------------------------------------------------------------
 
+
+//--------------------- ФИЛЬТРАЦИЯ ПРОДУКТОВ ПО НАЧАЛЬНЫМ СИМВОЛАМ И ПОСЛЕДУЮЩИМ ----------------------
+    const [searchQuery, setSearchQuery] = useState('');
     useEffect(() => {
         const filteredStartsWith = products.filter(product =>
             product.name.toLowerCase().startsWith(searchQuery.toLowerCase())
@@ -45,9 +51,13 @@ export function SearchBar() {
         const combinedFilteredProducts = [...filteredStartsWith, ...filteredIncludes].slice(0, 5);
         setFilteredProducts(combinedFilteredProducts);
     }, [searchQuery, products]);
+//-----------------------------------------------------------------
+
+//--------- ОБНОВЛЕНИЕ СОСТОЯНИЯ ИНПУТА ----------------------------------------
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
+//-----------------------------------------------------------------
 
     return (
         <div className={classes.ExtendExpanded}>
