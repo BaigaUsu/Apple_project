@@ -6,35 +6,29 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build')  // Убедитесь, что выходной каталог указан правильно
   },
   module: {
     rules: [
-        {
-            test: /\.(ts|tsx)$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'ts-loader',
-            },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
         },
-        {
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-            },
-        },
-        {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
-        },
-        {
-            test: /\.scss$/i,
-            use: ['style-loader', 'css-loader', 'sass-loader'],
-        },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.scss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -43,7 +37,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'build'),  // Убедитесь, что devServer использует правильный каталог
     },
     hot: true,
     open: true,
